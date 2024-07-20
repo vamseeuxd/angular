@@ -1,6 +1,6 @@
 <h4>Who We Are</h4>
 
-<h5 class="fw-light mb-4" style="text-align: justify">
+<h6 class="fw-light mb-3 px-2" style="text-align: justify">
   Welcome to
   <span class="fs-5 text-primary">
     <i class="fa-solid fa-car me-2"></i>
@@ -8,94 +8,31 @@
   </span>
   , Vizag’s premier wholesale and retail dealer of top-quality car care and accessories. With a rich legacy spanning many years, we take
   pride in our attention to detail and our commitment to offering the best products in the industry at competitive prices.
-</h5>
+</h6>
 
-<h5 class="fw-light mb-4" style="text-align: justify">
+<h6 class="fw-light mb-4 px-2" style="text-align: justify">
   Studies show that the average Indian spends at least 200 minutes a day in their car, which accounts for 20% of their waking hours. Our
   goal is to make your time spent in your "second home" as comfortable and enjoyable as possible. Upgrading cars is our passion, and we
   invite you to explore our online catalog or visit our store today!
-</h5>
+</h6>
 
-<div class="row">
-  <ng-template #editContent let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">{{ editCardTitle }}</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-      <form #editFormRef="ngForm">
-        <input type="hidden" [ngModel]="editCard.id" name="id" />
-        <input type="hidden" [ngModel]="editCard.position" name="position" />
-        <div class="mb-3">
-          <label for="dateOfBirth">Category Title</label>
-          <div class="input-group">
-            <input required [ngModel]="editCard.title" id="title" class="form-control" placeholder="Category Title" name="title" />
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="dateOfBirth">Category Description</label>
-          <div class="input-group">
-            <textarea
-              rows="13"
-              required
-              [ngModel]="editCard.text"
-              id="text"
-              class="form-control"
-              placeholder="Category Description"
-              name="text"
-            ></textarea>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="dateOfBirth">Category Image (Google Drive Photo ID)</label>
-          <div class="input-group">
-            <input
-              #img="ngModel"
-              required
-              [ngModel]="editCard.img"
-              id="img"
-              class="form-control"
-              placeholder="Category Image (Google Drive Photo ID)"
-              name="img"
-            />
-          </div>
-        </div>
-        <div class="mb-3 d-flex align-items-center justify-content-center">
-          <img width="100px" height="100px" class="rounded-circle" src="https://lh3.googleusercontent.com/d/{{ img.value }}" />
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" [disabled]="editFormRef.invalid" class="btn btn-outline-secondary" (click)="update(editFormRef)">Save</button>
-    </div>
-  </ng-template>
-
-  <h4 class="text-muted border-bottom pb-2 mb-2 d-flex">
+<div class="row mx-2">
+  <h4 class="text-muted border-bottom pb-2 mb-2 d-flex col-12">
     Categories
-    <button class="btn btn-danger ms-auto" (click)="openAddOrEditModal(editContent, idealCard, false)">Add New</button>
+    <button class="btn btn-danger ms-auto" (click)="openAddOrEditModal(idealCard, false)">Add New</button>
   </h4>
-  <!-- order-card start -->
-  <div
-    class="col-md-6 col-xl-3"
-    *ngFor="let card of cards; let first = first; let last = last; let index = index"
-    [style.viewTransitionName]="'category-card-' + card.id"
-  >
-    <app-card [hidHeader]="true">
-      <h4>{{ card.title }}</h4>
-      <div class="m-b-0 position-relative">
-        <img class="moon-img rounded-circle" src="https://lh3.googleusercontent.com/d/{{ card.img }}" />
-        <p class="moon-text" style="min-height: 360px;max-height: 360px;">
-          {{ card.text }}
-        </p>
-        <div style="clear: both"></div>
-      </div>
-      <div class="shadow border actions">
-        <i *ngIf="!first" (click)="movePrevious(index)" title="Move Left" class="shadow border fa fa-arrow-left"></i>
-        <i title="Edit" (click)="openAddOrEditModal(editContent, card)" class="shadow border fa fa-edit"></i>
-        <i title="Delete" (click)="remove(index)" class="shadow border fa fa-trash"></i>
-        <i *ngIf="!last" (click)="moveNext(index)" title="Move Right" class="shadow border fa fa-arrow-right"></i>
-      </div>
-    </app-card>
+  <div class="col-md-6 col-xl-3" *ngFor="let card of cards; let first = first; let last = last; let index = index">
+    <app-category-card
+      (movePrevious)="movePrevious(index)"
+      (edit)="openAddOrEditModal(card)"
+      (remove)="remove(index)"
+      (moveNext)="moveNext(index)"
+      [headerColor]="card.color"
+      [last]="last"
+      [first]="first"
+      [img]="card.img"
+      [description]="card.text"
+      [title]="card.title"
+    />
   </div>
-  <!-- order-card end -->
 </div>

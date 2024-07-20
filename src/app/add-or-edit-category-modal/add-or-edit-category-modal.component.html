@@ -1,0 +1,74 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{ title }}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <form class="col-md-6" #editFormRef="ngForm">
+      <input type="hidden" [ngModel]="category.id" name="id" />
+      <input type="hidden" [ngModel]="category.position" name="position" />
+      <div class="mb-3">
+        <label for="dateOfBirth">Category Title</label>
+        <div class="input-group">
+          <input required [ngModel]="category.title" id="title" class="form-control" placeholder="Category Title" name="title" />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirth">Image Background Color</label>
+        <div class="input-group">
+          <input
+            required
+            [ngModel]="category.color"
+            id="title"
+            class="form-control"
+            type="color"
+            placeholder="Category Image Background Color"
+            name="color"
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirth">Category Description</label>
+        <div class="input-group">
+          <textarea
+            rows="13"
+            required
+            [ngModel]="category.text"
+            id="text"
+            class="form-control"
+            placeholder="Category Description"
+            name="text"
+          ></textarea>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirth">Category Image (Google Drive Photo ID)</label>
+        <div class="input-group">
+          <input
+            #img="ngModel"
+            required
+            [ngModel]="category.img"
+            id="img"
+            class="form-control"
+            placeholder="Category Image (Google Drive Photo ID)"
+            name="img"
+          />
+        </div>
+      </div>
+    </form>
+    <div class="col-md-6">
+      <app-category-card
+        [headerColor]="editFormRef.value.color"
+        [last]="false"
+        [first]="false"
+        [isPreview]="true"
+        [img]="editFormRef.value.img"
+        [description]="editFormRef.value.text"
+        [title]="editFormRef.value.title"
+      />
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" [disabled]="editFormRef.invalid" class="btn btn-outline-secondary" (click)="update.emit(editFormRef)">Save</button>
+</div>

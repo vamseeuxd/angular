@@ -1,0 +1,96 @@
+.card {
+  height: 100%;
+  overflow: hidden;
+  max-width: 22rem;
+  border-radius: 1rem;
+  margin: 1rem 2rem;
+  font-family: 'Poppins', sans-serif;
+  transition:
+    transform 0.5s,
+    box-shadow 0.5s;
+  box-shadow: 0px 0px 20px 1px rgb(204 204 204 / 50%);
+  max-height: 35rem;
+}
+
+.card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0px 10px 20px 0px rgb(204 204 204 / 50%);
+}
+
+.card .header {
+  z-index: 2;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0rem 0rem 4rem 0rem;
+}
+
+.card .header::before {
+  content: '';
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 0rem 0rem 4rem 0rem;
+}
+
+.card .header img {
+  width: 85%;
+}
+
+.card .footer {
+  z-index: 2;
+  text-align: center;
+  position: relative;
+  padding: 20px 20px 20px 20px;
+}
+
+.card .footer::before {
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  height: 100%;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 3rem 0rem 0rem 0rem;
+}
+
+.card .footer .title {
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.card .footer p {
+  font-size: 0.8rem;
+  text-align: justify;
+}
+
+.actions {
+  position: absolute;
+  z-index: 2;
+  bottom: 10px;
+  background-color: rgba($color: #000000, $alpha: 0.2);
+  right: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  .fa {
+    padding: 5px;
+    cursor: pointer;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+    color: white;
+    margin-right: 5px;
+    border-radius: 5px;
+  }
+}
+
+.show-more {
+  position: absolute;
+  bottom: 10px;
+  left: 5px;
+  z-index: 2;
+}

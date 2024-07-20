@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="header" style="height: 200px" [style.backgroundColor]="headerColor()">
+    <img
+      style="object-fit: contain; height: 90%"
+      src="https://lh3.googleusercontent.com/d/{{img()}}"
+      alt="Product"
+    />
+  </div>
+  <div class="footer">
+    <div class="title">
+      <h4>{{ title() }}</h4>
+    </div>
+    <p>{{ description() }}</p>
+  </div>
+
+  <div class="shadow border actions" *ngIf="!isPreview()">
+    <i *ngIf="!first()" (click)="movePrevious.emit()" title="Move Left" class="shadow border fa fa-arrow-left"></i>
+    <i title="Edit" (click)="edit.emit()" class="shadow border fa fa-edit"></i>
+    <i title="Delete" (click)="remove.emit()" class="shadow border fa fa-trash"></i>
+    <i *ngIf="!last()" (click)="moveNext.emit()" title="Move Right" class="shadow border fa fa-arrow-right"></i>
+  </div>
+  <button class="btn btn-primary border-0 show-more" [style.backgroundColor]="headerColor()" style="font-size: 12px;">Show Gallery </button>
+</div>
