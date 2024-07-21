@@ -10,6 +10,7 @@ import { CategoryCardComponent } from 'src/app/category-card/category-card.compo
 import { AddOrEditCategoryModalComponent } from 'src/app/add-or-edit-category-modal/add-or-edit-category-modal.component';
 import { Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AppService } from 'src/app/app.service';
 
 export interface ICategory {
   id: string;
@@ -17,6 +18,7 @@ export interface ICategory {
   text: string;
   color: string;
   img: string;
+  category?: string;
   position: number;
 }
 
@@ -28,6 +30,7 @@ export interface ICategory {
   styleUrls: ['./dash-analytics.component.scss']
 })
 export default class DashAnalyticsComponent {
+  appService = inject(AppService);
   private modalService = inject(NgbModal);
   private firestore = inject(AngularFirestore);
 

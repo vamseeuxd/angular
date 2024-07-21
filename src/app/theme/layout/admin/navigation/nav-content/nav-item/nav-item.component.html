@@ -4,7 +4,16 @@
       @if (item.icon) {
         <span class="pcoded-micon"><i class="feather" [ngClass]="item.icon"></i></span>
       }
+      @if (item.img) {
+        <span class="pcoded-micon">
+          <div style="width: 30px;height: 30px;" class="d-inline-block me-2">
+            <img style="object-fit: contain; width: 25px;height: 25px;" src="https://lh3.googleusercontent.com/d/{{ item.img }}" alt="Product" />
+          </div>
+        </span>
+      }
       @if (item.icon) {
+        <span class="pcoded-mtext">{{ item.title }}</span>
+      } @else if (item.img) {
         <span class="pcoded-mtext">{{ item.title }}</span>
       } @else {
         {{ item.title }}
@@ -18,7 +27,16 @@
       @if (item.icon) {
         <span class="pcoded-micon"><i class="feather" [ngClass]="item.icon"></i></span>
       }
+      @if (item.img) {
+        <span class="pcoded-micon">
+          <div style="width: 30px;height: 30px;" class="d-inline-block me-2">
+            <img style="object-fit: contain; width: 25px;height: 25px;" src="https://lh3.googleusercontent.com/d/{{ item.img }}" alt="Product" />
+          </div>
+        </span>
+      }
       @if (item.icon) {
+        <span class="pcoded-mtext">{{ item.title }}</span>
+      } @else if (item.img) {
         <span class="pcoded-mtext">{{ item.title }}</span>
       } @else {
         {{ item.title }}

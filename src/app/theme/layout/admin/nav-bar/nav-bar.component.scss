@@ -1,0 +1,8 @@
+:host {
+  position: relative;
+  .login-button {
+    position: absolute;
+    right: 16px;
+    top: calc(50% - 12px);
+  }
+}

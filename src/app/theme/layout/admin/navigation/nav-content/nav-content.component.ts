@@ -1,10 +1,12 @@
 // angular import
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Location, LocationStrategy } from '@angular/common';
 
 // project import
 import { environment } from 'src/environments/environment';
 import { NavigationItem, NavigationItems } from '../navigation';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ICategory } from 'src/app/demo/dashboard/dash-analytics.component';
 
 @Component({
   selector: 'app-nav-content',
@@ -20,6 +22,8 @@ export class NavContentComponent implements OnInit {
   navigations: NavigationItem[];
   wrapperWidth!: number;
   windowWidth: number;
+  private firestore = inject(AngularFirestore);
+  cards: ICategory[] = [];
 
   @Output() NavMobCollapse = new EventEmitter();
   // constructor
@@ -28,7 +32,7 @@ export class NavContentComponent implements OnInit {
     private locationStrategy: LocationStrategy
   ) {
     this.windowWidth = window.innerWidth;
-    this.navigations = NavigationItems;
+    this.navigations = [...NavigationItems];
   }
 
   // life cycle event
@@ -36,6 +40,42 @@ export class NavContentComponent implements OnInit {
     if (this.windowWidth < 992) {
       document.querySelector('.pcoded-navbar')?.classList.add('menupos-static');
     }
+    this.firestore
+      .collection<ICategory>('categories')
+      .valueChanges({ idField: 'id' })
+      .subscribe((data) => {
+        this.cards = data.sort((a, b) => a.position - b.position);
+        const newNavigationItems: NavigationItem[] = this.cards.map((card) => {
+          return {
+            id: card.id,
+            title: card.title,
+            type: 'item',
+            url: '/category/' + card.id,
+            /* url: '/sample-page', */
+            img: card.img
+          };
+        });
+        if (NavigationItems[0] && NavigationItems[0].children) {
+          this.navigations = [
+            {
+              id: 'navigation',
+              title: 'Menu',
+              type: 'group',
+              icon: 'icon-group',
+              children: [
+                {
+                  id: 'dashboard',
+                  title: 'Dashboard',
+                  type: 'item',
+                  url: '/analytics',
+                  icon: 'feather icon-home'
+                },
+                ...newNavigationItems
+              ]
+            }
+          ];
+        }
+      });
   }
 
   // public method

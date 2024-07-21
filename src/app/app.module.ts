@@ -26,6 +26,7 @@ import { SharedModule } from './theme/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgbModalModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule
   ],

@@ -3,17 +3,19 @@ import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ICategory } from '../demo/dashboard/dash-analytics.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CategoryCardComponent } from '../category-card/category-card.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-or-edit-category-modal',
   standalone: true,
-  imports: [NgbModalModule, FormsModule, CategoryCardComponent],
+  imports: [NgbModalModule, FormsModule, CategoryCardComponent, CommonModule],
   templateUrl: './add-or-edit-category-modal.component.html',
   styleUrl: './add-or-edit-category-modal.component.scss'
 })
 export class AddOrEditCategoryModalComponent {
   activeModal = inject(NgbActiveModal);
   @Input() title = '';
+  @Input() moduleTitle = 'Category';
   @Input() category: ICategory = {
     id: '',
     title: '',

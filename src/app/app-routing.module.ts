@@ -39,6 +39,10 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadComponent: () => import('./demo/sample-page/sample-page.component')
+      },
+      {
+        path: 'category/:id',
+        loadComponent: () => import('./demo/sample-page/sample-page.component')
       }
     ]
   },

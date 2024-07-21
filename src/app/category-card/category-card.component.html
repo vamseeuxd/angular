@@ -4,6 +4,7 @@
       style="object-fit: contain; height: 90%"
       src="https://lh3.googleusercontent.com/d/{{img()}}"
       alt="Product"
+      (click)="showImage.emit()"
     />
   </div>
   <div class="footer">
@@ -13,11 +14,11 @@
     <p>{{ description() }}</p>
   </div>
 
-  <div class="shadow border actions" *ngIf="!isPreview()">
+  <div class="shadow border actions" *ngIf="!isPreview() && appService.isLogin">
     <i *ngIf="!first()" (click)="movePrevious.emit()" title="Move Left" class="shadow border fa fa-arrow-left"></i>
     <i title="Edit" (click)="edit.emit()" class="shadow border fa fa-edit"></i>
     <i title="Delete" (click)="remove.emit()" class="shadow border fa fa-trash"></i>
     <i *ngIf="!last()" (click)="moveNext.emit()" title="Move Right" class="shadow border fa fa-arrow-right"></i>
   </div>
-  <button class="btn btn-primary border-0 show-more" [style.backgroundColor]="headerColor()" style="font-size: 12px;">Show Gallery </button>
+  <button *ngIf="!isProduct()" [routerLink]="['../category',catId()]" class="btn btn-primary border-0 show-more" [style.backgroundColor]="headerColor()" style="font-size: 12px;">Show Products </button>
 </div>

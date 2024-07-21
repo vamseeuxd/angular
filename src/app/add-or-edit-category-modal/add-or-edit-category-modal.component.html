@@ -7,10 +7,11 @@
     <form class="col-md-6" #editFormRef="ngForm">
       <input type="hidden" [ngModel]="category.id" name="id" />
       <input type="hidden" [ngModel]="category.position" name="position" />
+      <input *ngIf="category.category" type="hidden" [ngModel]="category.category" name="category" />
       <div class="mb-3">
-        <label for="dateOfBirth">Category Title</label>
+        <label for="dateOfBirth">{{moduleTitle}} Title</label>
         <div class="input-group">
-          <input required [ngModel]="category.title" id="title" class="form-control" placeholder="Category Title" name="title" />
+          <input required [ngModel]="category.title" id="title" class="form-control" placeholder="{{moduleTitle}} Title" name="title" />
         </div>
       </div>
       <div class="mb-3">
@@ -28,7 +29,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="dateOfBirth">Category Description</label>
+        <label for="dateOfBirth">{{moduleTitle}} Description</label>
         <div class="input-group">
           <textarea
             rows="13"
@@ -36,13 +37,13 @@
             [ngModel]="category.text"
             id="text"
             class="form-control"
-            placeholder="Category Description"
+            placeholder="{{moduleTitle}} Description"
             name="text"
           ></textarea>
         </div>
       </div>
       <div class="mb-3">
-        <label for="dateOfBirth">Category Image (Google Drive Photo ID)</label>
+        <label for="dateOfBirth">{{moduleTitle}} Image (Google Drive Photo ID)</label>
         <div class="input-group">
           <input
             #img="ngModel"
@@ -50,7 +51,7 @@
             [ngModel]="category.img"
             id="img"
             class="form-control"
-            placeholder="Category Image (Google Drive Photo ID)"
+            placeholder="{{moduleTitle}} Image (Google Drive Photo ID)"
             name="img"
           />
         </div>

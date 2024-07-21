@@ -1,12 +1,51 @@
-<div class="row">
+<div class="row" *ngIf="!!category">
+  <div class="col-12">
+    <button class="btn btn-link ps-0" [routerLink]="['../../analytics']">Dashboard</button>
+  </div>
   <div class="col-sm-12">
-    <app-card cardTitle="Hello Card" [options]="false">
-      <p>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-        in culpa qui officia deserunt mollit anim id est laborum."
-      </p>
-    </app-card>
+    <h2 class="text-primary">
+      {{ category.title }}
+    </h2>
+    <div class="d-flex">
+      <img
+        style="object-fit: contain; height: 100px; width: 100px"
+        class="p-2 me-3"
+        src="https://lh3.googleusercontent.com/d/{{ category.img }}"
+        alt="Product"
+      />
+      <p>{{ category.text }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="row mx-2">
+  <h4 class="text-muted border-bottom pb-2 mb-2 d-flex col-12">
+    Products
+    <button class="btn btn-danger ms-auto" *ngIf="appService.isLogin" (click)="openAddOrEditModal(idealProduct, false)">Add New</button>
+  </h4>
+  <div class="col-md-6 col-xl-3" *ngFor="let card of products; let first = first; let last = last; let index = index">
+    <app-category-card
+      [catId]="card.id"
+      (movePrevious)="movePrevious(index)"
+      (edit)="openAddOrEditModal(card)"
+      (remove)="remove(index)"
+      (moveNext)="moveNext(index)"
+      (showImage)="selectedProduct = card"
+      [headerColor]="card.color"
+      [last]="last"
+      [first]="first"
+      [img]="card.img"
+      [description]="card.text"
+      [title]="card.title"
+    />
+  </div>
+</div>
+
+<div class="image-preview" *ngIf="!!selectedProduct">
+  <div class="container-img shadow border position-relative">
+    <i class="ms-auto pt-2 pe-2 fa fa-close fs-3 close-btn" role="button" (click)="selectedProduct = undefined"></i>
+    <img style="object-fit: contain" src="https://lh3.googleusercontent.com/d/{{ selectedProduct.img }}" alt="Product" />
+    <h4>{{selectedProduct.title}}</h4>
+    <p>{{selectedProduct.text}}</p>
   </div>
 </div>

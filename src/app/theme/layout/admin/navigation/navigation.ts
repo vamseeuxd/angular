@@ -4,6 +4,7 @@ export interface NavigationItem {
   type: 'item' | 'collapse' | 'group';
   translate?: string;
   icon?: string;
+  img?: string;
   hidden?: boolean;
   url?: string;
   classes?: string;

@@ -1,4 +1,4 @@
-<div class="m-header">
+<div class="m-header d-flex">
   <a href="javascript:" class="mobile-menu" id="mobile-collapse" title="Click to Menu Collapse" (click)="navCollapse()"><span></span></a>
   <a href="javascript:" class="header-mobile-collapse" id="mobile-collapse1" (click)="navCollapseMob()">
     <i class="feather icon-menu"></i>
@@ -10,11 +10,37 @@
       <i class="fa-solid fa-car me-2"></i>Auto Trends
     </div>
   </a>
-  <a class="mob-toggler" [ngClass]="{ on: this.menuClass }" href="javascript:" (click)="toggleMobOption()">
-    <i class="feather icon-more-vertical"></i>
-  </a>
 </div>
 <div class="collapse navbar-collapse" [style.display]="this.collapseStyle">
   <app-nav-left class="me-auto"></app-nav-left>
   <app-nav-right class="ms-auto"></app-nav-right>
 </div>
+
+<a *ngIf="!appService.isLogin" class="login-button" role="button" (click)="showLogin(loginRef)">
+  Login
+</a>
+<a *ngIf="appService.isLogin" class="login-button" role="button" (click)="appService.isLogin = false;">
+  Logout
+</a>
+
+<ng-template #loginRef let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">User Login</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form #loginFormRef="ngForm" autocomplete="off">
+      <div class="mb-3">
+        <label for="userNameControl" class="form-label">User Name</label>
+        <input type="text" required ngModel class="form-control" name="name" id="userNameControl" placeholder="User Name">
+      </div>
+      <div class="mb-3">
+        <label for="passwordControl" class="form-label">Password</label>
+        <input type="password" required ngModel name="password" class="form-control" id="passwordControl" placeholder="Password">
+      </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" [disabled]="loginFormRef.invalid" (click)="login(loginFormRef);modal.dismiss('Cross click');" class="btn btn-outline-secondary">Login</button>
+	</div>
+</ng-template>

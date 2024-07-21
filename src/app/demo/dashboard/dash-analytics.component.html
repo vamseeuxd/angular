@@ -18,16 +18,18 @@
 
 <div class="row mx-2">
   <h4 class="text-muted border-bottom pb-2 mb-2 d-flex col-12">
-    Categories
-    <button class="btn btn-danger ms-auto" (click)="openAddOrEditModal(idealCard, false)">Add New</button>
+    Product Categories
+    <button class="btn btn-danger ms-auto" *ngIf="appService.isLogin" (click)="openAddOrEditModal(idealCard, false)">Add New</button>
   </h4>
   <div class="col-md-6 col-xl-3" *ngFor="let card of cards; let first = first; let last = last; let index = index">
     <app-category-card
+      [catId]="card.id"
       (movePrevious)="movePrevious(index)"
       (edit)="openAddOrEditModal(card)"
       (remove)="remove(index)"
       (moveNext)="moveNext(index)"
       [headerColor]="card.color"
+      [isProduct]="false"
       [last]="last"
       [first]="first"
       [img]="card.img"
